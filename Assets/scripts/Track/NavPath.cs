@@ -30,7 +30,7 @@ public class NavPath
         Bounds bounds = navMesh.bounds;
         bounds.Expand(100);
 
-        RectangleF bounds2d = new RectangleF(bounds.min.x, bounds.min.z, bounds.size.x, bounds.size.z);
+        Bounds2d bounds2d = new Bounds2d(bounds.min.x, bounds.min.z, bounds.size.x, bounds.size.z);
 
         //quadtree
         quadtree = new Quadtree(bounds2d);
@@ -97,6 +97,11 @@ public class NavPath
         return nextIdx;
     }
 
+    public float GetDistance(int startIdx, int endIdx)
+    {
+        return distances[startIdx, endIdx];
+    }
+
     private void InitializeDistances()
     {
         List<ISpatialEntity2d> possibleIntersections = quadtree.GetElements();
@@ -116,13 +121,13 @@ public class NavPath
                 distances.AddEdge(line.idx1, line.idx2, Mathf.Infinity);
             }
         }
-        distances.CalculateShortestDistance();
+        distances.CalculateShortestDistanceImmediate();
     }
 
     public void UpdateObstacle(Collider collider)
     {
         Bounds bounds = collider.bounds;
-        Rectangle2d bounds2d = new Rectangle2d(bounds);
+        Bounds2d bounds2d = new Bounds2d(bounds.min.x, bounds.min.z, bounds.size.x, bounds.size.z);
 
         List<ISpatialEntity2d> possibleIntersections = quadtree.FindCollisions(bounds2d);
         int layer = 1 << LayerMask.NameToLayer("Obstacle");

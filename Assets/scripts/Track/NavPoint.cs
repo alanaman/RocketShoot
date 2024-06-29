@@ -7,11 +7,11 @@ public class NavPoint : ISpatialEntity2d
 {
     public float x;
     public float y;
-    public RectangleF bounds
+    public Bounds2d bounds
     {
         get
         {
-            return new RectangleF(x, y, 0, 0);
+            return new Bounds2d(x, y, 0, 0);
         }
     }
 

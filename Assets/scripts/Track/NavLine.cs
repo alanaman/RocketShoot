@@ -13,7 +13,7 @@ public class NavLine : ISpatialEntity2d
     public readonly Vector3 v1;
     public readonly Vector3 v2;
 
-    public RectangleF bounds
+    public Bounds2d bounds
     {
         get
         {
@@ -21,7 +21,7 @@ public class NavLine : ISpatialEntity2d
             float maxX = Mathf.Max(v1.x, v2.x);
             float minZ = Mathf.Min(v1.z, v2.z);
             float maxZ = Mathf.Max(v1.z, v2.z);
-            return new RectangleF(minX, minZ, maxX - minX, maxZ - minZ);
+            return new Bounds2d(minX, minZ, maxX - minX, maxZ - minZ);
         }
     }
 

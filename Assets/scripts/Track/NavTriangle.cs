@@ -13,7 +13,7 @@ public class NavTriangle : ISpatialEntity2d
     Vector3 v2;
     Vector3 v3;
 
-    public RectangleF bounds
+    public Bounds2d bounds
     {
         get
         {
@@ -21,7 +21,7 @@ public class NavTriangle : ISpatialEntity2d
             float maxX = Mathf.Max(Mathf.Max(v1.x, v2.x), v3.x);
             float minZ = Mathf.Min(Mathf.Min(v1.z, v2.z), v3.z);
             float maxZ = Mathf.Max(Mathf.Max(v1.z, v2.z), v3.z);
-            return new RectangleF(minX, minZ, maxX - minX, maxZ - minZ);
+            return new Bounds2d(minX, minZ, maxX - minX, maxZ - minZ);
         }
     }
 

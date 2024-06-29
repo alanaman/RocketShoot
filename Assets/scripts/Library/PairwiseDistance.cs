@@ -84,12 +84,18 @@ public class PairwiseDistance
     {
         if (isDirty)
         {
-            Thread backgroundThread = new Thread(this.CalculateShortestDistanceInternal);
+            Thread backgroundThread = new Thread(CalculateShortestDistanceImmediate);
             backgroundThread.Start();
             isDirty = false;
         }
         lock(calculatedDistances)
         {
+            if(idx1 == idx2)
+            {
+                if (calculatedDistances[idx1][0] != 0)
+                    Debug.LogWarning("bad impl");
+            }
+
             return calculatedDistances[Math.Min(idx1, idx2)][Math.Abs(idx2 - idx1)];
         }
     }
@@ -104,9 +110,8 @@ public class PairwiseDistance
     {
         if (isDirty)
         {
-            Thread backgroundThread = new Thread(this.CalculateShortestDistanceInternal);
+            Thread backgroundThread = new Thread(CalculateShortestDistanceImmediate);
             backgroundThread.Start();
-            isDirty = false;
         }
         else
         {
@@ -114,7 +119,8 @@ public class PairwiseDistance
         }
     }
 
-    void CalculateShortestDistanceInternal()
+    //TODO make this private once scene loading is implemented
+    public void CalculateShortestDistanceImmediate()
     {
         //deep copy edge distances
         var dists = new List<List<float>>();
@@ -128,6 +134,7 @@ public class PairwiseDistance
                     dists[i].Add(edges[i][j]);
                 }
             }
+            isDirty = false;
         }
 
         //Floyd-Warshall algorithm

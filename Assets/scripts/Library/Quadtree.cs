@@ -14,16 +14,16 @@ public sealed class Quadtree
     private readonly int _bucketCapacity;
     private readonly int _maxDepth;
 
-    public RectangleF bounds
+    public Bounds2d bounds
     { get; }
 
     private Quadtree _topLeft, _topRight, _bottomLeft, _bottomRight;
 
-    public Quadtree(RectangleF bounds)
+    public Quadtree(Bounds2d bounds)
         : this(bounds, 32, 5)
     { }
 
-    public Quadtree(RectangleF bounds, int bucketCapacity, int maxDepth)
+    public Quadtree(Bounds2d bounds, int bucketCapacity, int maxDepth)
     {
         _bucketCapacity = bucketCapacity;
         _maxDepth = maxDepth;
@@ -105,11 +105,8 @@ public sealed class Quadtree
     /// </summary>
     /// <param name="element">The spatial element to find collisions for.</param>
     /// <returns>All spatial elements that collide with <c>element</c>.</returns>
-    public List<ISpatialEntity2d> FindCollisions(ISpatialEntity2d element)
+    public List<ISpatialEntity2d> FindCollisions(Bounds2d element)
     {
-        if (element == null)
-            throw new ArgumentNullException(nameof(element));
-
         var nodes = new Queue<Quadtree>();
         var collisions = new List<ISpatialEntity2d>();
 
@@ -119,23 +116,23 @@ public sealed class Quadtree
         {
             var node = nodes.Dequeue();
 
-            if (!element.bounds.IntersectsWith(node.bounds))
+            if (!bounds.Intersects(node.bounds))
                 continue;
 
-            collisions.AddRange(node._elements.FindAll(e => e.bounds.IntersectsWith(element.bounds)));
+            collisions.AddRange(node._elements.FindAll(e => e.bounds.Intersects(bounds)));
 
             if (!node.IsLeaf)
             {
-                if (element.bounds.IntersectsWith(node._topLeft.bounds))
+                if (bounds.Intersects(node._topLeft.bounds))
                     nodes.Enqueue(node._topLeft);
 
-                if (element.bounds.IntersectsWith(node._topRight.bounds))
+                if (bounds.Intersects(node._topRight.bounds))
                     nodes.Enqueue(node._topRight);
 
-                if (element.bounds.IntersectsWith(node._bottomLeft.bounds))
+                if (bounds.Intersects(node._bottomLeft.bounds))
                     nodes.Enqueue(node._bottomLeft);
 
-                if (element.bounds.IntersectsWith(node._bottomRight.bounds))
+                if (bounds.Intersects(node._bottomRight.bounds))
                     nodes.Enqueue(node._bottomRight);
             }
         }
@@ -200,11 +197,11 @@ public sealed class Quadtree
         if (Level + 1 > _maxDepth)
             return;
 
-        PointF center = bounds.Center();
-        _topLeft = CreateChild(bounds.Location);
-        _topRight = CreateChild(new PointF(center.X, bounds.Location.Y));
-        _bottomLeft = CreateChild(new PointF(bounds.Location.X, center.Y));
-        _bottomRight = CreateChild(new PointF(center.X, center.Y));
+        Vector2 center = bounds.Center;
+        _bottomLeft = CreateChild(bounds.Location);
+        _bottomRight = CreateChild(new Vector2(center.x, bounds.Location.y));
+        _topLeft = CreateChild(new Vector2(bounds.Location.x, center.y));
+        _topRight = CreateChild(new Vector2(center.x, center.y));
 
         var elements = new List<ISpatialEntity2d>(_elements);
 
@@ -221,8 +218,8 @@ public sealed class Quadtree
         }
     }
 
-    private Quadtree CreateChild(PointF location)
-        => new(new RectangleF(location, bounds.Size / 2), _bucketCapacity, _maxDepth)
+    private Quadtree CreateChild(Vector2 location)
+        => new(new Bounds2d(location, bounds.Size / 2), _bucketCapacity, _maxDepth)
         {
             Level = Level + 1
         };
@@ -240,7 +237,7 @@ public sealed class Quadtree
         _topLeft = _topRight = _bottomLeft = _bottomRight = null;
     }
 
-    private Quadtree GetContainingChild(RectangleF bounds)
+    private Quadtree GetContainingChild(Bounds2d bounds)
     {
         if (IsLeaf)
             return null;

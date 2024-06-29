@@ -1,28 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FinishLine : MonoBehaviour
 {
-    [SerializeField] Transform checkpoints;
+    [SerializeField] public Checkpoint[] checkpoints;
 
-/*    public void OnActivate()
+    public static FinishLine I { get; private set; }
+
+    int position = 1;
+
+    private void Awake()
     {
-        finishTrigger.enabled = true;
+        if (I != null && I != this)
+        {
+            Destroy(this);
+            return;
+        }
+
+        I = this;
     }
 
-    public void OnDeactivate()
+    public void OnFinishLineEnter(Racer racer)
     {
-        finishTrigger.enabled = false;
-    }*/
-
-    public void OnFinishLineEnter()
-    {
-        if (checkpoints.childCount > 0)
-            return;
-
-        Debug.Log(GameManager.I.timer);
-        Loader.Load(Loader.Scene.MainMenu);
+        if (racer.checkpoints.Count > 0)
+        {
+            if(racer.gameObject == GameManager.I.Player)
+            {
+                Debug.Log("You finished in position " + position + " with a time of " + GameManager.I.timer + " seconds!");
+                Loader.Load(Loader.Scene.MainMenu);
+            }
+            position++;
+        }
     }
 
 }

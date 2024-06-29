@@ -32,7 +32,7 @@ public class NavTrack : MonoBehaviour
         if(tree == null)
             ConstructTree();
 
-        List<ISpatialEntity2d> tris = tree.FindCollisions(point);
+        List<ISpatialEntity2d> tris = tree.FindCollisions(point.bounds);
 
         foreach (NavTriangle tri in tris) 
         {
@@ -92,6 +92,14 @@ public class NavTrack : MonoBehaviour
         return navPath.IsTargetNear(idxSeeker, idxTarget);
     }
 
+    public float GetLossyDistance(Transform seeker, Transform target)
+    {
+        int idxSeeker = GetSparsePoint(seeker);
+        int idxTarget = GetSparsePoint(target);
+
+        return navPath.GetDistance(idxSeeker, idxTarget);
+    }
+
     private int GetSparsePoint(Transform target)
     {
         NavTriangle tri = GetTriangleContaining(target);
@@ -106,7 +114,7 @@ public class NavTrack : MonoBehaviour
         if (tree == null)
             ConstructTree();
 
-        List<ISpatialEntity2d> tris = tree.FindCollisions(point);
+        List<ISpatialEntity2d> tris = tree.FindCollisions(point.bounds);
 
         foreach (NavTriangle tri in tris)
         {
@@ -115,6 +123,8 @@ public class NavTrack : MonoBehaviour
                 return tri;
             }
         }
+        Debug.LogWarning("target is not in any triangle. Maybe it's outside the track?");
+
         return null;
     }
 
@@ -139,7 +149,7 @@ public class NavTrack : MonoBehaviour
         Bounds bounds = trackMesh.bounds;
         bounds.Expand(10);
 
-        RectangleF bounds2d = new RectangleF(bounds.min.x, bounds.min.z, bounds.size.x, bounds.size.z);
+        Bounds2d bounds2d = new Bounds2d(bounds.min.x, bounds.min.z, bounds.size.x, bounds.size.z);
 
         tree = new Quadtree(bounds2d);
 
@@ -177,8 +187,8 @@ public class NavTrack : MonoBehaviour
         inst.transform.localScale = new Vector3(tree.bounds.Width, tree.bounds.Height, 1);
         var pos = inst.transform.position;
         pos.y = height;
-        pos.x = tree.bounds.Center().X;
-        pos.z = tree.bounds.Center().Y;
+        pos.x = tree.bounds.Center.x;
+        pos.z = tree.bounds.Center.x;
         inst.transform.position = pos;
 
         inst.GetComponent<MeshRenderer>().material.color = new UnityEngine.Color(Random.value, Random.value, Random.value);

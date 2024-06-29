@@ -6,9 +6,9 @@ public class FinishTrigger : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other == GameManager.I.PlayerCollider)
+        if (other.gameObject.TryGetComponent(out Racer racer))
         {
-            GetComponentInParent<FinishLine>().OnFinishLineEnter();
+            GetComponentInParent<FinishLine>().OnFinishLineEnter(racer);
         }
     }
 }
