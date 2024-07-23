@@ -5,7 +5,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UIElements;
@@ -31,6 +30,8 @@ public class Track : MonoBehaviour
     {
         
     }
+
+#if UNITY_EDITOR
 
     [ContextMenu("CreateMesh")]
     void CreateMesh()
@@ -139,18 +140,18 @@ public class Track : MonoBehaviour
         }
     }
 
-/*    [ContextMenu("AlignCorner")]
-    void AlignCorner()
-    {
-        for(int i=0;i<transform.childCount;i++)
+    /*    [ContextMenu("AlignCorner")]
+        void AlignCorner()
         {
-            var child = transform.GetChild(i);
-            var verts = GetComponent<MeshFilter>().sharedMesh.vertices;
+            for(int i=0;i<transform.childCount;i++)
+            {
+                var child = transform.GetChild(i);
+                var verts = GetComponent<MeshFilter>().sharedMesh.vertices;
 
-            child.GetComponent<TrackCorner>().Align(verts[(verts.Length + i - 1)%verts.Length], verts[i], verts[(i + 1)%verts.Length]);
-        }
-    }*/
-
+                child.GetComponent<TrackCorner>().Align(verts[(verts.Length + i - 1)%verts.Length], verts[i], verts[(i + 1)%verts.Length]);
+            }
+        }*/
+#endif
     private void OnValidate()
     {
         //Mesh mesh = gameObject.GetComponent<MeshFilter>().sharedMesh;

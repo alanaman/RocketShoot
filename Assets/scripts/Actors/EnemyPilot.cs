@@ -41,7 +41,7 @@ public class EnemyPilot : MonoBehaviour
 
         Vector3 targetPos = targetToDestory.transform.position;
 
-        NavMeshPathUtil nma = GetComponentInChildren<NavMeshPathUtil>();
+        NavMeshAgentUtil nma = GetComponentInChildren<NavMeshAgentUtil>();
 
         NavMeshPath path = new NavMeshPath();
         nma.CalculatePath(targetPos, path);

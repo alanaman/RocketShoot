@@ -18,26 +18,31 @@ public class RivalPilot : MonoBehaviour
 
 
     Racer racer;
+    NavMeshPath path;
 
     PidController pidController;
 
     private Vector3 _targetDir;
-    NavMeshPathUtil nma;
+    NavMeshAgentUtil nma;
 
     private void Awake()
     {
-        var rb = GetComponent<Rigidbody>();
-        rb.inertiaTensor = new Vector3(inertia, inertia, inertia);
-        pidController = new PidController(transform);
+
         _targetDir = GetCurrentDirection();
     }
 
     private void Start()
     {
-        nma = GetComponentInChildren<NavMeshPathUtil>();
+        var rb = GetComponent<Rigidbody>();
+        rb.inertiaTensor = new Vector3(0, inertia, 0);
+        pidController = new PidController(transform);
+
+
+        nma = GetComponentInChildren<NavMeshAgentUtil>();
         racer = GetComponent<Racer>();
+        path = new NavMeshPath();
     }
-    private void FixedUpdate()
+    private void Update()
     {
 
 
@@ -45,7 +50,6 @@ public class RivalPilot : MonoBehaviour
 
         
 
-        NavMeshPath path = new NavMeshPath();
         nma.CalculatePath(targetPos, path);
         if(path.status != NavMeshPathStatus.PathComplete)
         {
@@ -73,6 +77,11 @@ public class RivalPilot : MonoBehaviour
 
             TurnAndMove(target - transform.position);
         }
+    }
+
+    public NavMeshPath GetNavMeshPath()
+    {
+        return path;
     }
 
     private void TurnAndMove(Vector3 targetVector)

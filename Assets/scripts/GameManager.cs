@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     public NavTrack navTrack;
 
+    public float timeScale = 0.1f;
+
     private void Awake()
     {
         if (I != null && I != this)
@@ -26,11 +29,13 @@ public class GameManager : MonoBehaviour
         }
 
         I = this;
+
+        Time.timeScale = timeScale;
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
+        timer += Time.unscaledDeltaTime;
     }
 
     public static bool TryGetPlayer(out Player player)

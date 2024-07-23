@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 public class TrailLineMeshGenerator : MonoBehaviour

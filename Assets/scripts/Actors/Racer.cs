@@ -8,6 +8,9 @@ public class Racer : MonoBehaviour
 
     public Transform currentTarget { get; private set; }
 
+    [HideInInspector]
+    public int finishedPosition = -1;
+
     void Start()
     {
         checkpoints = new HashSet<Checkpoint>(FinishLine.I.checkpoints);
@@ -32,6 +35,11 @@ public class Racer : MonoBehaviour
         {
             currentTarget = FinishLine.I.transform;
         }
+    }
+
+    public bool HasFinished()
+    {
+        return finishedPosition > 0;
     }
 
 

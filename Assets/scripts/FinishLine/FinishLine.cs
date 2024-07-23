@@ -31,6 +31,7 @@ public class FinishLine : MonoBehaviour
                 Debug.Log("You finished in position " + position + " with a time of " + GameManager.I.timer + " seconds!");
                 Loader.Load(Loader.Scene.MainMenu);
             }
+            racer.finishedPosition = position;
             position++;
         }
     }

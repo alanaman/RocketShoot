@@ -14,7 +14,6 @@ public class NavTrack : MonoBehaviour
     NavPath navPath;
     Quadtree tree;
 
-    NavTriangle currTri = null;
     [SerializeField] LayerMask rayCastLayerMask;
 
     private void Awake()
@@ -22,54 +21,6 @@ public class NavTrack : MonoBehaviour
         ConstructTree();
         navPath = new NavPath(navPathMesh);
         navPath.rayCastLayerMask = rayCastLayerMask;
-    }
-
-    private void Update()
-    {
-        Vector3 targetPos = transform.InverseTransformPoint(GameManager.I.Player.transform.position);
-        NavPoint point = new NavPoint(targetPos.x, targetPos.z);
-        
-        if(tree == null)
-            ConstructTree();
-
-        List<ISpatialEntity2d> tris = tree.FindCollisions(point.bounds);
-
-        foreach (NavTriangle tri in tris) 
-        {
-            if(tri.ContainsPoint(point.x, point.y))
-            {
-                if(currTri != tri)
-                {
-                    currTri = tri;
-                    CreateTriViz();
-                }
-            }
-        }
-    }
-
-    public void CreateTriViz()
-    {
-        while (transform.childCount != 0)
-        {
-            var child = transform.GetChild(0);
-            DestroyImmediate(child.gameObject);
-        }
-
-        Mesh trackMesh = GetComponent<MeshFilter>().sharedMesh;
-        Vector3[] vertices = trackMesh.vertices;
-        int[] triangles = trackMesh.triangles;
-
-        int i = currTri.startIdx;
-        Vector3[] verts = new Vector3[3];
-
-        verts[0] = vertices[triangles[i]];
-        verts[1] = vertices[triangles[i+1]];
-        verts[2] = vertices[triangles[i+2]];
-        
-        foreach (Vector3 v in verts)
-        {
-            Instantiate(plane, transform.TransformPoint(v), Quaternion.identity, transform);
-        }
     }
 
     public Vector3 GetNextTargetPosition(Transform seeker, Transform target)
@@ -200,6 +151,7 @@ public class NavTrack : MonoBehaviour
         
     }
 
+#if UNITY_EDITOR
     [ContextMenu("AddVertexColors")]
     void AddVertexColors()
     {
@@ -240,7 +192,7 @@ public class NavTrack : MonoBehaviour
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
-
+#endif
     public void UpdateObstacle(Collider collider)
     {
         navPath.UpdateObstacle(collider);

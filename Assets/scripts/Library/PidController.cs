@@ -33,6 +33,14 @@ public class PidController
         tau = Kd / (Kp * N);
     }
 
+    public void Init(Transform transform)
+    {
+        err = new float[3];
+        d0 = 0; d1 = 0; fd0 = 0; fd1 = 0; torque = 0;
+        this.transform = transform;
+        tau = Kd / (Kp * N);
+    }
+
     //To be called ONCE every frame (in FixedUpdate)
     public void ApplyTorque(Vector3 currentDir, Vector3 targetDir)
     {

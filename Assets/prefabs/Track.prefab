@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7818540815767294697}
   - component: {fileID: -5748644303048433657}
   - component: {fileID: -8669764191121575326}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Track
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boundary: {fileID: 0}
   corner: {fileID: 3884251028268362768, guid: 54f2d39fdbd02674fbfbfa064c2ac945, type: 3}
-  edge: {fileID: 919132149155446097, guid: 5cb5f9ac554a094449b93406b72567df, type: 3}
+  edge: {fileID: 8098000387752032874, guid: 3829144331358df4caea6349c5332871, type: 3}
 --- !u!33 &-8669764191121575326
 MeshFilter:
   m_ObjectHideFlags: 0

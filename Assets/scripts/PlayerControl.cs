@@ -29,9 +29,9 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         //get input
-        Vector2 dir_input2d = gameInput.getDirectionVector();
-        if (dir_input2d.magnitude > 1) { dir_input2d.Normalize(); }
-        Vector3 dir_input = new Vector3(dir_input2d.x, 0, dir_input2d.y);
+        Vector2 dirInput2d = gameInput.getDirectionVector();
+        if (dirInput2d.magnitude > 1) { dirInput2d.Normalize(); }
+        Vector3 dirInput = new Vector3(dirInput2d.x, 0, dirInput2d.y);
         float acc = gameInput.getAccelaration() * accelerationMax;
 
 
@@ -43,6 +43,8 @@ public class PlayerControl : MonoBehaviour
         Vector3 force = acc * dirCurrent;
         //force -= force * Vector3.Dot(dir_current, rb.velocity) * (1 - Mathf.Exp(-rb.velocity.magnitude * LINEAR_DAMP));
 
+        Debug.DrawRay(transform.position, dirInput * 50, Color.green);
+        Debug.DrawRay(transform.position, dirCurrent * 100, Color.blue);
         if (acc > 0.01)
         {
             Vector3 longitudinal_comp = dirCurrent * Vector3.Dot(dirCurrent, rb.velocity);
@@ -56,8 +58,8 @@ public class PlayerControl : MonoBehaviour
         rb.AddForce(force);
 
         //rotational
-        if (dir_input.magnitude > 0.1)
-            dirTarget = dir_input.normalized;
+        if (dirInput.magnitude > 0.1)
+            dirTarget = dirInput.normalized;
 
         float delta_angle = Vector3.SignedAngle(dirTarget, dirCurrent, -Vector3.up) / Mathf.PI;
 

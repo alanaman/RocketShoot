@@ -9,9 +9,11 @@ public class MinimapUI : MonoBehaviour
     [SerializeField] RawImage minimapImage;
     [SerializeField] Vector2 WorldSize;
 
+    [SerializeField] Transform target;
+
     void Update()
     {
-        Vector3 playerPos = GameManager.I.Player.transform.position;
+        Vector3 playerPos = target.position;
         Vector2 playerPos2D = new Vector2(playerPos.x, playerPos.z);
 
         Vector2 playerPosOnMap = new Vector2(
