@@ -44,6 +44,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""X"",
+                    ""type"": ""Button"",
+                    ""id"": ""875fe056-1710-44a8-82b3-c8fca5da3c17"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Y"",
+                    ""type"": ""Button"",
+                    ""id"": ""12ffe7dd-5800-4974-a10d-b1653f606f1d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -200,6 +218,175 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""direction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""751a249e-5540-4080-a4f0-fbf89f89dbd3"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""X"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f423f7e-fda4-4249-95e2-2ba9e205c09a"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Y"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PieMenu"",
+            ""id"": ""e974820b-1c74-4d33-ab86-7ebb0140fc0f"",
+            ""actions"": [
+                {
+                    ""name"": ""select"",
+                    ""type"": ""Value"",
+                    ""id"": ""805216ac-8c57-43a3-aabd-8db66a5bec01"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""X"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7d695b5-300f-4827-a24c-f73f8d10e957"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""RStick"",
+                    ""id"": ""6241628a-f22f-48dc-bff3-16b21219af0d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""select"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""44186021-4a46-4f4b-96cf-c2ebd7917eb8"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""1db2ef82-393b-4108-be82-d5f796baba90"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""4ba59f41-afb7-43b8-a8b6-d176ecbdf7c4"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""ad6ae1c6-2636-4f32-8595-06b155b8c6ea"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""ArrowKeys"",
+                    ""id"": ""9b92464d-2bcc-4172-9b3b-7821f5cda76a"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""select"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""ec6d4910-1214-4226-9057-5c0afeb7cb56"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""aae7b008-51bd-4eb3-96d5-ebda7c6d6225"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""30c34ba7-418c-4e4c-8d01-f7d86428b082"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""14e80f4d-e972-4671-bff0-4582e953982f"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a24f60bd-ed01-40f7-a003-0df8c08ed929"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""X"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -210,6 +397,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_accelerate = m_Player.FindAction("accelerate", throwIfNotFound: true);
         m_Player_direction = m_Player.FindAction("direction", throwIfNotFound: true);
+        m_Player_X = m_Player.FindAction("X", throwIfNotFound: true);
+        m_Player_Y = m_Player.FindAction("Y", throwIfNotFound: true);
+        // PieMenu
+        m_PieMenu = asset.FindActionMap("PieMenu", throwIfNotFound: true);
+        m_PieMenu_select = m_PieMenu.FindAction("select", throwIfNotFound: true);
+        m_PieMenu_X = m_PieMenu.FindAction("X", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,12 +466,16 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_accelerate;
     private readonly InputAction m_Player_direction;
+    private readonly InputAction m_Player_X;
+    private readonly InputAction m_Player_Y;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @accelerate => m_Wrapper.m_Player_accelerate;
         public InputAction @direction => m_Wrapper.m_Player_direction;
+        public InputAction @X => m_Wrapper.m_Player_X;
+        public InputAction @Y => m_Wrapper.m_Player_Y;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -294,6 +491,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @direction.started += instance.OnDirection;
             @direction.performed += instance.OnDirection;
             @direction.canceled += instance.OnDirection;
+            @X.started += instance.OnX;
+            @X.performed += instance.OnX;
+            @X.canceled += instance.OnX;
+            @Y.started += instance.OnY;
+            @Y.performed += instance.OnY;
+            @Y.canceled += instance.OnY;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -304,6 +507,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @direction.started -= instance.OnDirection;
             @direction.performed -= instance.OnDirection;
             @direction.canceled -= instance.OnDirection;
+            @X.started -= instance.OnX;
+            @X.performed -= instance.OnX;
+            @X.canceled -= instance.OnX;
+            @Y.started -= instance.OnY;
+            @Y.performed -= instance.OnY;
+            @Y.canceled -= instance.OnY;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -321,9 +530,70 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // PieMenu
+    private readonly InputActionMap m_PieMenu;
+    private List<IPieMenuActions> m_PieMenuActionsCallbackInterfaces = new List<IPieMenuActions>();
+    private readonly InputAction m_PieMenu_select;
+    private readonly InputAction m_PieMenu_X;
+    public struct PieMenuActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public PieMenuActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @select => m_Wrapper.m_PieMenu_select;
+        public InputAction @X => m_Wrapper.m_PieMenu_X;
+        public InputActionMap Get() { return m_Wrapper.m_PieMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PieMenuActions set) { return set.Get(); }
+        public void AddCallbacks(IPieMenuActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PieMenuActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PieMenuActionsCallbackInterfaces.Add(instance);
+            @select.started += instance.OnSelect;
+            @select.performed += instance.OnSelect;
+            @select.canceled += instance.OnSelect;
+            @X.started += instance.OnX;
+            @X.performed += instance.OnX;
+            @X.canceled += instance.OnX;
+        }
+
+        private void UnregisterCallbacks(IPieMenuActions instance)
+        {
+            @select.started -= instance.OnSelect;
+            @select.performed -= instance.OnSelect;
+            @select.canceled -= instance.OnSelect;
+            @X.started -= instance.OnX;
+            @X.performed -= instance.OnX;
+            @X.canceled -= instance.OnX;
+        }
+
+        public void RemoveCallbacks(IPieMenuActions instance)
+        {
+            if (m_Wrapper.m_PieMenuActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPieMenuActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PieMenuActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PieMenuActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PieMenuActions @PieMenu => new PieMenuActions(this);
     public interface IPlayerActions
     {
         void OnAccelerate(InputAction.CallbackContext context);
         void OnDirection(InputAction.CallbackContext context);
+        void OnX(InputAction.CallbackContext context);
+        void OnY(InputAction.CallbackContext context);
+    }
+    public interface IPieMenuActions
+    {
+        void OnSelect(InputAction.CallbackContext context);
+        void OnX(InputAction.CallbackContext context);
     }
 }

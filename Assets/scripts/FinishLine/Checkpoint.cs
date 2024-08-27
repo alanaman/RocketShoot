@@ -12,22 +12,26 @@ public class Checkpoint : MonoBehaviour
 
     [SerializeField] Renderer progressRenderer;
 
-/*    void Update()
+    private void Start()
     {
-        if (hasEntered)
+        progressRenderer.material.SetFloat("_progress", 0);
+    }
+    /*    void Update()
         {
-            pickupProgress += Time.deltaTime;
-            if (pickupProgress > triggerTime)
+            if (hasEntered)
             {
-                Destroy(viz);
+                pickupProgress += Time.deltaTime;
+                if (pickupProgress > triggerTime)
+                {
+                    Destroy(viz);
+                }
             }
-        }
-        else if (pickupProgress > -0.01f)
-        {
-            pickupProgress -= Time.deltaTime;
-        }
-        progressRenderer.material.SetFloat("_progress", pickupProgress / triggerTime);
-    }*/
+            else if (pickupProgress > -0.01f)
+            {
+                pickupProgress -= Time.deltaTime;
+            }
+            progressRenderer.material.SetFloat("_progress", pickupProgress / triggerTime);
+        }*/
 
     private void OnTriggerEnter(Collider other)
     {

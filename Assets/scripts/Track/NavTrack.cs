@@ -23,7 +23,7 @@ public class NavTrack : MonoBehaviour
         navPath.rayCastLayerMask = rayCastLayerMask;
     }
 
-    public Vector3 GetNextTargetPosition(Transform seeker, Transform target)
+    public Vector3 GetNextTargetPosition(in Vector3 seeker, in Vector3 target)
     {
         int idxSeeker = GetSparsePoint(seeker);
         int idxTarget = GetSparsePoint(target);
@@ -33,7 +33,21 @@ public class NavTrack : MonoBehaviour
         return transform.TransformPoint(navPathMesh.vertices[nextIdx]);        
     }
 
-    public bool IsTargetNear(Transform seeker, Transform target)
+    public List<Vector3> GetPath(in Vector3 seeker, in Vector3 target, int maxPoints)
+    {
+        int idxSeeker = GetSparsePoint(seeker);
+        int idxTarget = GetSparsePoint(target);
+
+        List<int> pathIdx = navPath.GetPath(idxSeeker, idxTarget, maxPoints);
+        List<Vector3> path = new List<Vector3>(pathIdx.Count);
+        foreach (int idx in pathIdx)
+        {
+            path.Add(transform.TransformPoint(navPathMesh.vertices[idx]));
+        }
+        return path;
+    }
+
+    public bool IsTargetNear(in Vector3 seeker, in Vector3 target)
     {
         int idxSeeker = GetSparsePoint(seeker);
         int idxTarget = GetSparsePoint(target);
@@ -43,7 +57,7 @@ public class NavTrack : MonoBehaviour
         return navPath.IsTargetNear(idxSeeker, idxTarget);
     }
 
-    public float GetLossyDistance(Transform seeker, Transform target)
+    public float GetLossyDistance(in Vector3 seeker, in Vector3 target)
     {
         int idxSeeker = GetSparsePoint(seeker);
         int idxTarget = GetSparsePoint(target);
@@ -51,15 +65,14 @@ public class NavTrack : MonoBehaviour
         return navPath.GetDistance(idxSeeker, idxTarget);
     }
 
-    private int GetSparsePoint(Transform target)
+    private int GetSparsePoint(in Vector3 target)
     {
         NavTriangle tri = GetTriangleContaining(target);
         return tri.closestSparsePointIdx;
     }
 
-    private NavTriangle GetTriangleContaining(Transform t)
+    private NavTriangle GetTriangleContaining(in Vector3 targetPos)
     {
-        Vector3 targetPos = transform.InverseTransformPoint(t.position);
         NavPoint point = new NavPoint(targetPos.x, targetPos.z);
 
         if (tree == null)

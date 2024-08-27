@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public Collider PlayerCollider { get { return playerCollider; } private set { playerCollider = value; } }
     [SerializeField] private Collider playerCollider;
 
+    [SerializeField] PieMenuUI pieMenuUI;
+
     public float timer = 0;
 
     public NavTrack navTrack;
@@ -47,5 +49,15 @@ public class GameManager : MonoBehaviour
     {
         playerCollider = I.playerCollider;
         return playerCollider != null;
+    }
+
+    public void ActivatePieMenu()
+    {
+        pieMenuUI.gameObject.SetActive(true);
+    }
+
+    public void DeactivatePieMenu()
+    {
+        pieMenuUI.gameObject.SetActive(false);
     }
 }

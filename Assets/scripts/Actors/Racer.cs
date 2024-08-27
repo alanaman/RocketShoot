@@ -24,7 +24,7 @@ public class Racer : MonoBehaviour
         float minDist = Mathf.Infinity;
         foreach (Checkpoint newTarget in checkpoints)
         {
-            float dist = GameManager.I.navTrack.GetLossyDistance(transform, newTarget.transform);
+            float dist = GameManager.I.navTrack.GetLossyDistance(transform.position, newTarget.transform.position);
             if (dist < minDist)
             {
                 minDist = dist;

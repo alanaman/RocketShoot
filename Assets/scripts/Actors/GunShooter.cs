@@ -16,11 +16,14 @@ public class GunShooter : MonoBehaviour
 
     int bulletSpawnIdx = 0;
     private float reloadTimer;
+    [SerializeField] GameObject rangeIndicator;
 
 
     void Start()
     {
         reloadTimer = reloadTime;
+        transform.localScale = Vector3.one;
+        rangeIndicator.transform.localScale = Vector3.one * gunRange / transform.lossyScale.x;
     }
 
     void Update()
@@ -37,7 +40,8 @@ public class GunShooter : MonoBehaviour
 
         foreach(Collider enemyCollider in nearbyEnemies)
         {
-            if(enemyCollider.gameObject.TryGetComponent(out Enemy enemy))
+            Enemy enemy = enemyCollider.gameObject.GetComponentInParent<Enemy>();
+            if (enemy != null)
             {
                 //check if enemy is in fov of gun 
                 if(Vector3.Angle(transform.forward, enemy.transform.position - transform.position) > fov)

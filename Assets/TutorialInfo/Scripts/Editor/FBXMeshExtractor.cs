@@ -4,7 +4,8 @@ using UnityEditor;
 public class FBXMeshExtractor
 {
     private static string _progressTitle = "Extracting Meshes";
-    private static string _sourceExtension = ".fbx";
+    private static string _fbxExtension = ".fbx";
+    private static string _blendExtension = ".blend";
     private static string _targetExtension = ".asset";
 
 
@@ -13,7 +14,12 @@ public class FBXMeshExtractor
     {
         for (int i = 0; i < Selection.objects.Length; i++)
         {
-            if (!AssetDatabase.GetAssetPath(Selection.objects[i]).EndsWith(_sourceExtension))
+            bool isMesh = false;
+            if (AssetDatabase.GetAssetPath(Selection.objects[i]).EndsWith(_fbxExtension))
+                isMesh = true;
+            if (AssetDatabase.GetAssetPath(Selection.objects[i]).EndsWith(_blendExtension))
+                isMesh = true;
+            if (!isMesh)
                 return false;
         }
         return true;

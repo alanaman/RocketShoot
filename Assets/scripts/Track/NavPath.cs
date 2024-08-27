@@ -97,6 +97,18 @@ public class NavPath
         return nextIdx;
     }
 
+    public List<int> GetPath(int startIdx, int endIdx, int maxPoints)
+    {
+        List<int> path = new List<int>{ startIdx };
+        int currentIdx = startIdx;
+        while (currentIdx != endIdx && path.Count < maxPoints)
+        {
+            currentIdx = GetNextSparsePointIdx(currentIdx, endIdx);
+            path.Add(currentIdx);
+        }
+        return path;
+    }
+
     public float GetDistance(int startIdx, int endIdx)
     {
         return distances[startIdx, endIdx];

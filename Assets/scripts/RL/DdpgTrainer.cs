@@ -111,7 +111,6 @@ class DdpgTrainer : MonoBehaviour
         }
 
         timer += Time.deltaTime;
-        frameCount++;
         if (frameCount > trainingInterval)
         {
             frameCount = 0;
@@ -120,6 +119,10 @@ class DdpgTrainer : MonoBehaviour
             var traincall = client.TrainAsync(new Routeguide.VoidMsg());
             trainingAwaiter = traincall.GetAwaiter();
         }
+    }
+    private void FixedUpdate()
+    {
+        frameCount++;
     }
 
     public void RememberAsync(DdpgState state, DdpgAction action, float reward, DdpgState nextState, bool done)

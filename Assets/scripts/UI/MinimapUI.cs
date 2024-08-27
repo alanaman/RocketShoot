@@ -13,6 +13,10 @@ public class MinimapUI : MonoBehaviour
 
     void Update()
     {
+        if(target == null)
+        {
+            return;
+        }
         Vector3 playerPos = target.position;
         Vector2 playerPos2D = new Vector2(playerPos.x, playerPos.z);
 

@@ -109,7 +109,10 @@ public class DdpgAgent : MonoBehaviour
         
         if (path.status != NavMeshPathStatus.PathComplete)
         {
-            targetPos = GameManager.I.navTrack.GetNextTargetPosition(transform, racer.currentTarget);
+            targetPos = GameManager.I.navTrack.GetNextTargetPosition(
+                transform.position,
+                racer.currentTarget.position
+            );
             nma.CalculatePath(targetPos, path);
         }
 
@@ -186,12 +189,18 @@ public class DdpgAgent : MonoBehaviour
         {
             return;
         }
+        var moved = transform.position.xz() - lastPosition;
+        if(moved.magnitude == 0)
+        {
+            return;
+        }
+        lastPosition = transform.position.xz();
+
+
         var new_state = GetState();
         //TODO: calculate reward
 
 
-        var moved = transform.position.xz() - lastPosition;
-        lastPosition = transform.position.xz();
 
         var weigths = new float[3]; 
         
@@ -203,7 +212,7 @@ public class DdpgAgent : MonoBehaviour
         float reward = 0;
         for(int i = 0; i < weigths.Length; i++)
         {
-            float distanceGained = state.targets[i].magnitude - (state.targets[i] - moved).magnitude;
+            float distanceGained = state.targets[i].magnitude - (state.targets[i] - moved/100).magnitude;
             reward += weigths[i] * distanceGained;
         }
         reward = reward * 0.02f / (Time.deltaTime + 0.02f);
@@ -228,7 +237,7 @@ public class DdpgAgent : MonoBehaviour
     DdpgState GetState()
     {
         DdpgState state = new DdpgState();
-        state.velocity = rb.velocity.xz();
+        state.velocity = rb.velocity.xz() / 10;
         state.forward = transform.forward.xz();
         state.angularVelocity = rb.angularVelocity.y;
         state.rayCastDistances = new float[numRays];
@@ -253,7 +262,7 @@ public class DdpgAgent : MonoBehaviour
         var corners = path.corners;
         for(int i = 0; i < state.targets.Length; i++)
         {
-            state.targets[i] = (corners[Math.Min(i + 1, corners.Length - 1)] - transform.position).xz();
+            state.targets[i] = (corners[Math.Min(i + 1, corners.Length - 1)] - transform.position).xz() / 100;
         }
 
         return state;

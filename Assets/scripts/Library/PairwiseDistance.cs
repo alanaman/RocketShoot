@@ -35,6 +35,7 @@ public class PairwiseDistance
                 calculatedDistances[i].Add(Mathf.Infinity);
                 edges[i].Add(Mathf.Infinity);
             }
+            edges[i][0] = 0;
         }
     }
 

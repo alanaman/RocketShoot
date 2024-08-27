@@ -10,24 +10,30 @@ public class Bullet : MonoBehaviour
     [SerializeField] float damage = 0.1f;
     float bulletVfxLifetime = 1;
 
+    Vector3 velocity = Vector3.zero;
+
     public void Init(Vector3 initialVelocity)
     {
-        GetComponent<Rigidbody>().velocity = initialVelocity;
+        this.velocity = initialVelocity;
+    }
+
+    private void FixedUpdate()
+    {
+        transform.position += velocity * Time.fixedDeltaTime;
     }
 
     void OnTriggerEnter(Collider other)
     {
         bulletVfx.SendEvent("OnExplode");
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
         Destroy(bulletViz);
         Destroy(gameObject, bulletVfxLifetime);
         if (other == GameManager.I.PlayerCollider)
         {
             GameManager.I.Player.HitDamage(damage);
         }
-        else if(other.TryGetComponent<Enemy>(out Enemy enemy))
+        else
         {
-            enemy.HitDamage(damage);
+            other.GetComponentInParent<Enemy>()?.HitDamage(damage);
         }
     }
 

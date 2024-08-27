@@ -47,7 +47,7 @@ public class EnemyPilot : MonoBehaviour
         nma.CalculatePath(targetPos, path);
         if(path.status != NavMeshPathStatus.PathComplete)
         {
-            targetPos = GameManager.I.navTrack.GetNextTargetPosition(transform, targetToDestory.transform);
+            targetPos = GameManager.I.navTrack.GetNextTargetPosition(transform.position, targetToDestory.transform.position);
             nma.CalculatePath(targetPos, path);
             Vector3 target = path.corners[1];
             TurnAndMove(target - transform.position);
